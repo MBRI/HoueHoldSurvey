@@ -1,2 +1,0 @@
-# HoueHoldSurvey
-Stata Users
