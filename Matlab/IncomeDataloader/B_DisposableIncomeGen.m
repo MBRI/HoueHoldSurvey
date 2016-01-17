@@ -1,7 +1,8 @@
 function II=B_DisposableIncomeGen(StartYear,EndYear)
 %Load A_InitIncomeLoader output from \out\T*.mat
 % Also it loads "IncomeCategories.xlsx" which is includ the weights of each
-% Column
+% Column regarding disposable income 1 to the column which includes and 0 otherwise
+% it means the last column of Section 1 and 2 and all item in section 3 and 4 for 1369 and later
 % output is an xls file in out\DisIncome.xlsx
 tic;
 if nargin==1
