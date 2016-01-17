@@ -64,13 +64,13 @@ for i=1:M_tp
     if Y==74
         Data.Address=cellfun(@filladdress,Data.Address,'uniformoutput',false);
     end
-    Data=grpstats(Data,'Address',@sum); % Income summation  for every households
+    Data=grpstats(Data,'Address',@sum,'VarNames',Data.Properties.VarNames(2:end)); % Income summation  for every households
     Data.GroupCount=[];%remove useless col
     Data.Properties.ObsNames=[];
-    for o=2:Oo % Remove sum_ from the begining of header
-        Data.Properties.VarNames{o}=Data.Properties.VarNames{o}(5:end);
-    end
-    
+%     for o=2:Oo % Remove sum_ from the begining of header
+%         Data.Properties.VarNames{o}=Data.Properties.VarNames{o}(5:end);
+%     end
+%     
     %------------------------------------------------------
     CC = join(CC,Data,'key','Address','Type','outer','MergeKeys',true); %add to data collector
     clear Data;

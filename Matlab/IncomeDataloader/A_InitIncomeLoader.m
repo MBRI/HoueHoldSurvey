@@ -1,5 +1,5 @@
-function C_RunMe(StartYear,EndYear)
-% extract defined personal information and cost
+function A_InitIncomeLoader(StartYear,EndYear)
+% extract defined personal Income All without any Concern
 % output is an mat file
 tic;
 if nargin==1
