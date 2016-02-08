@@ -43,5 +43,5 @@ for(year in 63:93)
 
 endtime <- proc.time()
 
-cat("\n\n============================\n============================\nIt took ")
+cat("\n\n============================\nIt took ")
 cat(endtime-starttime)
