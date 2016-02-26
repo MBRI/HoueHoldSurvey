@@ -1,4 +1,4 @@
-# 00-UNRARDataFiles.R
+# 02-ExtractAccessFiles.R
 # downloads the RAR files that are not present in the folder 
 # specified in Settings file
 #
