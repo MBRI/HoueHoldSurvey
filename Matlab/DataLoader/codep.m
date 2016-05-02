@@ -6,24 +6,22 @@ disp(['Loading ' Rg num2str(Y) 'P1']);
 
 [~, ~, Data] = readacc( Fname,[Rg num2str(Y) 'P1']);           % open access file
 
+
+%{
+to ensure about cols' name
+%}
+if Y~=92
+   Data.Properties.VarNames={'Address','DYCOL01','DYCOL03','DYCOL04','DYCOL05','DYCOL06','DYCOL07','DYCOL08','DYCOL09','DYCOL10'};
+else
+    Data.Properties.VarNames={'Address','DYCOL01','DYCOL02','DYCOL03','DYCOL04','DYCOL05','DYCOL06','DYCOL07','DYCOL08','DYCOL09','DYCOL10'};
+    Data(:,'DYCOL02') = [];
+end
 Data.Region(:,1)=r;
 
 %clear Du Dr;
 Data.Year(:,1)=Y;
 disp('Load Done');
-%{
-to ensure about cols' name
 %}
-Data.Properties.VarNames{1} = 'Address';
-Data.Properties.VarNames{2} = 'DYCOL01';
-Data.Properties.VarNames{3} = 'DYCOL03';
-Data.Properties.VarNames{4} = 'DYCOL04';
-Data.Properties.VarNames{5} = 'DYCOL05';
-Data.Properties.VarNames{6} = 'DYCOL06';
-Data.Properties.VarNames{7} = 'DYCOL07';
-Data.Properties.VarNames{8} = 'DYCOL08';
-Data.Properties.VarNames{9} = 'DYCOL09';
-Data.Properties.VarNames{10} = 'DYCOL10';
 %convert to num: Just important cols
 Data.DYCOL01=cell2num(Data.DYCOL01);
 %Data.DYCOL03=str2num(cell2mat(Data.DYCOL03));
@@ -94,18 +92,49 @@ e5=grpstats(ed(and(ed.('DYCOL08')>=514,ed.('DYCOL08')<=516),1),'Address');
 %e5.Properties.VarNames{2} = 'MS';
 e6=grpstats(ed(and(ed.('DYCOL08')>=517,ed.('DYCOL08')<=606),1),'Address');
 %e6.Properties.VarNames{2} = 'PHD';
-e1 = join(e1,e2,'key','Address','Type','outer','MergeKeys',true);
-e3 = join(e3,e4,'key','Address','Type','outer','MergeKeys',true);
-e5 = join(e5,e6,'key','Address','Type','outer','MergeKeys',true);
-e1 = join(e1,e3,'key','Address','Type','outer','MergeKeys',true);
-e1 = join(e1,e5,'key','Address','Type','outer','MergeKeys',true);
-
+try
+    e1 = join(e1,e2,'key','Address','Type','outer','MergeKeys',true);
+    e3 = join(e3,e4,'key','Address','Type','outer','MergeKeys',true);
+    e5 = join(e5,e6,'key','Address','Type','outer','MergeKeys',true);
+    e1 = join(e1,e3,'key','Address','Type','outer','MergeKeys',true);
+    e1 = join(e1,e5,'key','Address','Type','outer','MergeKeys',true);
+end
+if size(e1,2)<2
+    e1.UnderD=zeros(size(e1,1),1);
+else
 e1.Properties.VarNames{2} = 'UnderD';
+end
+
+if size(e1,2)<3
+    e1.Dipl=zeros(size(e1,1),1);
+else
 e1.Properties.VarNames{3} = 'Dipl';
+end
+
+if size(e1,2)<4
+    e1.Tech=zeros(size(e1,1),1);
+else
 e1.Properties.VarNames{4} = 'Tech';
+end
+
+if size(e1,2)<5
+    e1.BS=zeros(size(e1,1),1);
+else
 e1.Properties.VarNames{5} = 'BS';
+end
+
+if size(e1,2)<6
+    e1.MS=zeros(size(e1,1),1);
+else
 e1.Properties.VarNames{6} = 'MS';
+end
+
+if size(e1,2)<7
+    e1.PhD=zeros(size(e1,1),1);
+else
 e1.Properties.VarNames{7} = 'PhD';
+end
+
 X89 = join(X89,e1,'key','Address','Type','outer','MergeKeys',true);
 clear ed e1 e2 e3 e4 e5 e6;
 X89.UnderD(isnan(X89.UnderD))=0;

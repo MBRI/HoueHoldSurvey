@@ -22,6 +22,7 @@ for Y=StartYear:EndYear
     % augment Rural and urban datasets
     TT=vertcat(join(codec(Y,0,Fname), codep(Y,0,Fname),'key','Address','Type','outer','MergeKeys',true),join(codec(Y,1,Fname), codep(Y,1,Fname),'key','Address','Type','outer','MergeKeys',true));
     eval(['T' num2str(Y) '=TT;']);
+    
     %export(TT,'XLSfile',['T' num2str(Y)]);
        clear TT;
     save(['out\' num2str(Y) '.mat'], ['T' num2str(Y)]);
