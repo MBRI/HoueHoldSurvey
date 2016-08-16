@@ -1,8 +1,11 @@
-function [Result]=MRet(X,Y,Fname,tnam)
+function [Result]=MRet(X,Y,Fname,tnam,Quarter)
 % this would extract the Season of moraje
 % to do;
 %   X=Housholds address
 %   Y=year
+%   Fname is the file name and address
+%   tnam is from init1
+%   Quarter: 0 for monthly and 1 for quarterly, default is 1
 %   Result is a data set
 % for example after exracting data from houshold micro data of 1380, save it to
 % a dataset variable like M, then use the command
@@ -10,6 +13,9 @@ function [Result]=MRet(X,Y,Fname,tnam)
 % A.Address is assighn to X
 % A.MahMorajeh is the season when houshold  fullfill the quastinaries
 
+if ~exist('Quarter','var')
+    Quarter=1;
+end
 
 if nargin<4
     Y=X;
@@ -37,7 +43,7 @@ else
      Result=Result(:,{'Address' 'MahMorajeh'});
 end
 
-disp('Load MaheMoraje Done' );
+    disp('Load MaheMoraje Done' );
     %this the number of Cost table for the year between 1386:1391
     Oo=0; %M_tp(14);RsName(0,M_tp);
     Ss=Result.Properties.VarNames{size(Result,2)+Oo};% find the Header of the Golden Col
@@ -46,7 +52,7 @@ disp('Load MaheMoraje Done' );
     Result.Properties.VarNames{2} = 'MahMorajeh';
 
     
-if Y>86  %convert month to season
+if Y>86 && Quarter==1 %convert month to season
     Result.MahMorajeh= ceil(Result.MahMorajeh/3);
 end
 
