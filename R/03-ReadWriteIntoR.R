@@ -1,4 +1,5 @@
-# 03-Read and Save All Tables into R Format
+# 03-ReadWriteIntoR
+# Read and Save All Tables into R Format
 #
 # Copyright © 2015: Majid Einian
 # Licence: GPL-3
@@ -19,7 +20,7 @@ library(data.table)
 
 load(Settings$weightsFile)
 
-for(year in 63:93)
+for(year in (Settings$startyear:Settings$endyear))
 {
   cat(paste0("\n------------------------------\nYear:",year,"\n"))
   
@@ -38,7 +39,7 @@ for(year in 63:93)
   }
   Tables[[paste0("RU",year,"Weights")]] <- AllWeights[(Year==year),]
   close(cns)
-  save(Tables,file=paste0("D:/HEIS/DataProcessed/Y",year,"Raw.rda"))
+  save(Tables,file=paste0(Settings$HEISRawPath,"Y",year,"Raw.rda"))
 }
 
 endtime <- proc.time()

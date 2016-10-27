@@ -3,7 +3,7 @@ HEISCompressedPath: D:/HEIS/DataCompressed/
 HEISAccessPath: D:/HEIS/DataAccess/
 HEISRawPath: D:/HEIS/DataRaw/
 HEISProcessedPath: D:/HEIS/DataProcessed/
-startyear: 63.0
+startyear: 69.0
 endyear: 93.0
 OS: windows
 RawDataWebAddress: http://www.amar.org.ir/Portals/0/amarmozuii/hazinedaramad/
